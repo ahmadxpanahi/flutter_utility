@@ -13,41 +13,57 @@ Widget plusMinus({
   final MainAxisAlignment mainAxisAlignment = MainAxisAlignment.center,
   final MainAxisSize mainAxisSize = MainAxisSize.min,
 }) {
-  final RxInt currentAmount = defaultValue.obs;
+  int currentAmount = defaultValue;
 
   final RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
 
   String mathFunc(final Match match) => '${match[1]},';
 
   void increaseAmount() {
-    currentAmount.value = currentAmount.value + range;
-    onChanged(currentAmount.value);
+    currentAmount = currentAmount + range;
+    onChanged(currentAmount);
   }
 
   void decreaseAmount() {
-    if (currentAmount > range - 1) currentAmount.value = currentAmount.value - range;
-    onChanged(currentAmount.value);
+    if (currentAmount > range - 1) currentAmount = currentAmount - range;
+    onChanged(currentAmount);
   }
 
   String amountString() {
     final String result = currentAmount
         .toString()
         .padLeft(
-          currentAmount.value.toString().length,
+          currentAmount.toString().length,
           '0',
         )
         .replaceAllMapped(reg, mathFunc);
     return result;
   }
 
-  return Obx(
-    () => Row(
+  return StatefulBuilder(
+    builder: (final _, final StateSetter setter) => Row(
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,
       children: <Widget>[
-        GestureDetector(onTap: increaseAmount, child: addWidget ?? Icon(Icons.add_circle, size: 30)),
+        GestureDetector(
+            onTap: () {
+              setter(() => increaseAmount());
+            },
+            child: addWidget ??
+                Icon(
+                  Icons.add_circle,
+                  size: 30,
+                )),
         Text(amountString(), style: textStyle).marginSymmetric(horizontal: spaceBetween),
-        GestureDetector(onTap: decreaseAmount, child: minusWidget ?? Icon(Icons.remove_circle, size: 30)),
+        GestureDetector(
+            onTap: () {
+              setter(() => decreaseAmount());
+            },
+            child: minusWidget ??
+                Icon(
+                  Icons.remove_circle,
+                  size: 30,
+                )),
       ],
     ),
   );
