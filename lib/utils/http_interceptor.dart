@@ -1,30 +1,29 @@
 import 'package:flutter/foundation.dart';
 import 'package:utilities/utilities.dart';
 
-GetConnect getConnect = GetConnect(
-  followRedirects: false,
-  timeout: const Duration(minutes: 60),
-  allowAutoSignedCert: true,
-  sendUserAgent: true,
-  userAgent: "SinaMN75",
-  maxRedirects: 10,
-  maxAuthRetries: 3,
-);
-
-Future<void> request<T>(
-  final String url,
-  final EHttpMethod httpMethod,
-  final Function(Response<T> response) action,
-  final Function(Response<T> response) error, {
-  final dynamic body,
-  final bool encodeBody = true,
-  final Map<String, String>? headers,
-}) async {
+Future<void> request(
+    final String url,
+    final EHttpMethod httpMethod,
+    final Function(Response<dynamic> response) action,
+    final Function(Response<dynamic> response) error, {
+      final String? queryOrMutation,
+      final dynamic body,
+      final bool encodeBody = true,
+      final Map<String, String>? headers,
+      final String userAgent = 'Ahmad',
+      final bool followRedirects = true,
+      final Duration timeout = const Duration(minutes: 60),
+      final int maxRedirects = 5,
+      final bool allowAutoSignedCert = false,
+      final bool sendUserAgent = false,
+      final int maxAuthRetries = 1,
+      final bool withCredentials = false,
+    }) async {
   final Map<String, String> header = <String, String>{"Authorization": getString(UtilitiesConstants.token) ?? ""};
 
   if (headers != null) header.addAll(headers);
 
-  Response<T> response = Response<T>();
+  Response<dynamic> response = const Response<dynamic>();
   try {
     dynamic params;
     if (body != null) {
@@ -34,85 +33,217 @@ Future<void> request<T>(
         params = body;
     }
 
-    if (httpMethod == EHttpMethod.get) response = await getConnect.get(url, headers: header);
-    if (httpMethod == EHttpMethod.post) response = await getConnect.post(url, params, headers: header);
-    if (httpMethod == EHttpMethod.put) response = await getConnect.put(url, params, headers: header);
-    if (httpMethod == EHttpMethod.patch) response = await getConnect.patch(url, params, headers: header);
-    if (httpMethod == EHttpMethod.delete) response = await getConnect.delete(url, headers: header);
+    final GetConnect connect = GetConnect(
+      userAgent: userAgent,
+      followRedirects: followRedirects,
+      timeout: timeout,
+      maxRedirects: maxRedirects,
+      allowAutoSignedCert: allowAutoSignedCert,
+      sendUserAgent: sendUserAgent,
+      maxAuthRetries: maxAuthRetries,
+      withCredentials: withCredentials,
+    );
+
+    if (httpMethod == EHttpMethod.get) response = await connect.get(url, headers: header);
+    if (httpMethod == EHttpMethod.post) response = await connect.post(url, params, headers: header);
+    if (httpMethod == EHttpMethod.put) response = await connect.put(url, params, headers: header);
+    if (httpMethod == EHttpMethod.patch) response = await connect.patch(url, params, headers: header);
+    if (httpMethod == EHttpMethod.delete) response = await connect.delete(url, headers: header);
   } catch (e) {
     error(response);
-    print(e);
   }
 
-  if (kDebugMode) delay(100, () => response.log(params: (body == null || !encodeBody) ? "" : body.toJson()));
-  if (response.isSuccessful())
+  if (kDebugMode)
+    delay(
+      100,
+          () => response.log(params: (body == null || !encodeBody) ? "" : body.toJson()),
+    );
+  //unAuthorize
+  if (response.isSuccessful()) {
     action(response);
-  else
+  } else {
     error(response);
+  }
 }
 
-Future<void> get({
-  required String url,
-  required action(Response response),
-  required error(Response response),
-  Map<String, String>? headers,
+Future<void> httpGet({
+  required final String url,
+  required final Function(Response<dynamic> response) action,
+  required final Function(Response<dynamic> response) error,
+  final Map<String, String>? headers,
+  final String userAgent = 'Ahmad',
+  final bool followRedirects = true,
+  final Duration timeout = const Duration(minutes: 60),
+  final int maxRedirects = 5,
+  final bool allowAutoSignedCert = false,
+  final bool sendUserAgent = false,
+  final int maxAuthRetries = 1,
+  final bool withCredentials = false,
 }) async =>
-    await request(url, EHttpMethod.get, action, error, headers: headers);
+    request(
+      url,
+      EHttpMethod.get,
+      action,
+      error,
+      headers: headers,
+      userAgent: userAgent,
+      followRedirects: followRedirects,
+      timeout: timeout,
+      maxRedirects: maxRedirects,
+      allowAutoSignedCert: allowAutoSignedCert,
+      sendUserAgent: sendUserAgent,
+      maxAuthRetries: maxAuthRetries,
+      withCredentials: withCredentials,
+    );
 
-Future<void> post({
-  required String url,
-  required action(Response response),
-  required error(Response response),
-  Map<String, String>? headers,
-  dynamic body,
-  bool encodeBody = true,
+Future<void> httpPost({
+  required final String url,
+  required final Function(Response<dynamic> response) action,
+  required final Function(Response<dynamic> response) error,
+  final Map<String, String>? headers,
+  final dynamic body,
+  final bool encodeBody = true,
+  final String userAgent = 'Ahmad',
+  final bool followRedirects = true,
+  final Duration timeout = const Duration(minutes: 60),
+  final int maxRedirects = 5,
+  final bool allowAutoSignedCert = false,
+  final bool sendUserAgent = false,
+  final int maxAuthRetries = 1,
+  final bool withCredentials = false,
 }) async =>
-    await request(url, EHttpMethod.post, action, error, body: body, encodeBody: encodeBody, headers: headers);
+    request(
+      url,
+      EHttpMethod.post,
+      action,
+      error,
+      body: body,
+      encodeBody: encodeBody,
+      headers: headers,
+      userAgent: userAgent,
+      followRedirects: followRedirects,
+      timeout: timeout,
+      maxRedirects: maxRedirects,
+      allowAutoSignedCert: allowAutoSignedCert,
+      sendUserAgent: sendUserAgent,
+      maxAuthRetries: maxAuthRetries,
+      withCredentials: withCredentials,
+    );
 
-Future<void> put({
-  required String url,
-  required action(Response response),
-  required error(Response response),
-  Map<String, String>? headers,
-  dynamic body,
-  bool encodeBody = true,
+Future<void> httpPut({
+  required final String url,
+  required final Function(Response<dynamic> response) action,
+  required final Function(Response<dynamic> response) error,
+  final Map<String, String>? headers,
+  final dynamic body,
+  final bool encodeBody = true,
+  final String userAgent = 'Ahmad',
+  final bool followRedirects = true,
+  final Duration timeout = const Duration(minutes: 60),
+  final int maxRedirects = 5,
+  final bool allowAutoSignedCert = false,
+  final bool sendUserAgent = false,
+  final int maxAuthRetries = 1,
+  final bool withCredentials = false,
 }) async =>
-    await request(url, EHttpMethod.put, action, error, body: body, encodeBody: encodeBody, headers: headers);
+    request(
+      url,
+      EHttpMethod.put,
+      action,
+      error,
+      body: body,
+      encodeBody: encodeBody,
+      headers: headers,
+      userAgent: userAgent,
+      followRedirects: followRedirects,
+      timeout: timeout,
+      maxRedirects: maxRedirects,
+      allowAutoSignedCert: allowAutoSignedCert,
+      sendUserAgent: sendUserAgent,
+      maxAuthRetries: maxAuthRetries,
+      withCredentials: withCredentials,
+    );
 
 Future<void> patch({
-  required String url,
-  required action(Response response),
-  required error(Response response),
-  Map<String, String>? headers,
-  dynamic body,
-  bool encodeBody = true,
+  required final String url,
+  required final Function(Response<dynamic> response) action,
+  required final Function(Response<dynamic> response) error,
+  final Map<String, String>? headers,
+  final dynamic body,
+  final bool encodeBody = true,
+  final String userAgent = 'Ahmad',
+  final bool followRedirects = true,
+  final Duration timeout = const Duration(minutes: 60),
+  final int maxRedirects = 5,
+  final bool allowAutoSignedCert = false,
+  final bool sendUserAgent = false,
+  final int maxAuthRetries = 1,
+  final bool withCredentials = false,
 }) async =>
-    await request(url, EHttpMethod.patch, action, error, body: body, encodeBody: encodeBody, headers: headers);
+    request(
+      url,
+      EHttpMethod.patch,
+      action,
+      error,
+      body: body,
+      encodeBody: encodeBody,
+      headers: headers,
+      userAgent: userAgent,
+      followRedirects: followRedirects,
+      timeout: timeout,
+      maxRedirects: maxRedirects,
+      allowAutoSignedCert: allowAutoSignedCert,
+      sendUserAgent: sendUserAgent,
+      maxAuthRetries: maxAuthRetries,
+      withCredentials: withCredentials,
+    );
 
-Future<void> delete({
-  required String url,
-  required action(Response response),
-  required error(Response response),
-  Map<String, String>? headers,
+Future<void> httpDelete({
+  required final String url,
+  required final Function(Response<dynamic> response) action,
+  required final Function(Response<dynamic> response) error,
+  final Map<String, String>? headers,
+  final String userAgent = 'Ahmad',
+  final bool followRedirects = true,
+  final Duration timeout = const Duration(minutes: 60),
+  final int maxRedirects = 5,
+  final bool allowAutoSignedCert = false,
+  final bool sendUserAgent = false,
+  final int maxAuthRetries = 1,
+  final bool withCredentials = false,
 }) async =>
-    await request(url, EHttpMethod.delete, action, error, headers: headers);
+    request(
+      url,
+      EHttpMethod.delete,
+      action,
+      error,
+      headers: headers,
+      userAgent: userAgent,
+      followRedirects: followRedirects,
+      timeout: timeout,
+      maxRedirects: maxRedirects,
+      allowAutoSignedCert: allowAutoSignedCert,
+      sendUserAgent: sendUserAgent,
+      maxAuthRetries: maxAuthRetries,
+      withCredentials: withCredentials,
+    );
 
 enum EHttpMethod { get, post, put, patch, delete }
 
-extension HTTP<T> on Response<T> {
+extension HTTP on Response<dynamic> {
   bool isSuccessful() => (statusCode ?? 0) >= 200 && (statusCode ?? 0) <= 299 ? true : false;
 
   bool isServerError() => (statusCode ?? 0) >= 500 && (statusCode ?? 0) <= 599 ? true : false;
 
   void log({final String params = ""}) {
-    logger.i(
-      "${this.request!.method} - ${this.request!.url} - $statusCode \nPARAMS: $params \nRESPONSE: $body",
+    print(
+      "${this.request?.method} - ${this.request?.url} - $statusCode \nPARAMS: $params \nRESPONSE: $body",
     );
   }
 
   void prettyLog({final String params = ""}) {
-    logger.i(
-      "${this.request!.method} - ${this.request!.url} - $statusCode \nPARAMS: ${JsonEncoder.withIndent(" ").convert(params)} \nRESPONSE: ${JsonEncoder.withIndent(" ").convert(body)}",
+    print(
+      "${this.request?.method} - ${this.request?.url} - $statusCode \nPARAMS: ${const JsonEncoder.withIndent(" ").convert(params)} \nRESPONSE: ${const JsonEncoder.withIndent(" ").convert(body)}",
     );
   }
 }
