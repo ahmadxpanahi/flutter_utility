@@ -166,7 +166,7 @@ Widget iconTextHorizontal({
   final double spaceBetween = 6,
   final MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
   final CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
-  final MainAxisSize mainAxisSize = MainAxisSize.min,
+  final MainAxisSize mainAxisSize = MainAxisSize.max,
 }) =>
     GestureDetector(
       onTap: onTap,
@@ -187,7 +187,7 @@ Widget iconTextVertical({
   final double spaceBetween = 6,
   final MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
   final CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
-  final MainAxisSize mainAxisSize = MainAxisSize.min,
+  final MainAxisSize mainAxisSize = MainAxisSize.max,
 }) =>
     GestureDetector(
       onTap: onTap,
