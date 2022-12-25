@@ -20,7 +20,7 @@ dependencies:
   intl: ^0.17.0
   webviewx: ^0.2.1
   get_storage: ^2.0.3
-  flutter_svg: ^1.0.3
+  flutter_svg: ^1.1.6
   persian_tools: ^1.0.1
   group_button: ^5.0.1
   logger: ^1.1.0
