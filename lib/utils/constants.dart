@@ -56,6 +56,7 @@ class Sample {
   static const String englishLorem = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
   static const String profileImageUrl = "https://cdn.allthings.how/wp-content/uploads/2020/11/allthings.how-how-to-change-your-picture-on-zoom-profile-picture.png";
   static const String videoUrl = "https://abolfazlnezami.ir/file/video.mp4";
+  static const String sampleGif = "https://cscottdesign.co.uk/wp-content/uploads/2014/07/Gym-GIF.gif";
   static const String persianSampleName = "احمد پناهی";
   static const String englishSampleName = "ahmad panahi";
   static const String loremPicture = "https://picsum.photos/seed/picsum/200/300";
