@@ -32,6 +32,7 @@ dependencies:
   path_provider: ^2.0.10
   flutter_downloader: ^1.7.4
   flutter_local_notifications: ^9.5.2
+  smooth_page_indicator: ^1.0.0+2
 #  firebase_messaging: ^11.2.12
 #  firebase_core: ^1.14.0
 #  firebase_auth: ^3.3.13
