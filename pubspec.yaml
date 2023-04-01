@@ -1,7 +1,6 @@
 name: utilities
-description: A new Flutter package project.
+description: A Flutter package supported by ahmad panahi.
 version: 0.0.1
-homepage: SinaMN75.com
 publish_to: 'none'
 
 environment:
@@ -26,18 +25,11 @@ dependencies:
   logger: ^1.1.0
   image_cropper: ^2.0.2
   cached_network_image: ^3.2.0
-  video_player: ^2.4.2
-  just_audio: ^0.9.21
   syncfusion_flutter_pdfviewer: ^20.1.55-beta
   path_provider: ^2.0.10
-  flutter_downloader: ^1.7.4
   flutter_local_notifications: ^9.5.2
-#  firebase_messaging: ^11.2.12
-#  firebase_core: ^1.14.0
-#  firebase_auth: ^3.3.13
-#  google_sign_in: ^5.2.4
+  dio: ^5.1.1
+  dio_smart_retry: ^5.0.0
 
 flutter:
   uses-material-design: true
-#  assets:
-#    - lib/assets/data/

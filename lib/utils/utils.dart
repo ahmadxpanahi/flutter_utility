@@ -13,7 +13,6 @@ export 'extensions/text_extension.dart';
 export 'extensions/widget_extension.dart';
 export 'constants.dart';
 export 'file.dart';
-export 'file_downloader.dart';
 export 'get.dart';
 export 'http_interceptor.dart';
 export 'launch.dart';
