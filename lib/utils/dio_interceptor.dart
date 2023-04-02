@@ -9,7 +9,7 @@ Future<void> request(
   final EHttpMethod httpMethod,
   final Function(Response<dynamic> response) action,
   final Function(Response<dynamic> response) error, {
-  final Function(String error)? failure,
+  final Function(DioError error)? failure,
   final dynamic body,
   final bool encodeBody = true,
   final Map<String, String>? headers,
@@ -50,9 +50,9 @@ Future<void> request(
     } else {
       error(response);
     }
-  } catch (e) {
+  } on DioError catch (e) {
     if (failure != null) {
-      failure(e.toString());
+      failure(e);
     }
   }
 
@@ -68,7 +68,7 @@ Future<void> httpGet({
   required final String url,
   required final Function(Response<dynamic> response) action,
   required final Function(Response<dynamic> response) error,
-  final Function(String error)? failure,
+  final Function(DioError error)? failure,
   final Map<String, String>? headers,
 }) async =>
     request(
@@ -84,7 +84,7 @@ Future<void> httpPost({
   required final String url,
   required final Function(Response<dynamic> response) action,
   required final Function(Response<dynamic> response) error,
-  final Function(String error)? failure,
+  final Function(DioError error)? failure,
   final Map<String, String>? headers,
   final dynamic body,
   final bool encodeBody = true,
@@ -95,7 +95,7 @@ Future<void> httpPut({
   required final String url,
   required final Function(Response<dynamic> response) action,
   required final Function(Response<dynamic> response) error,
-  final Function(String error)? failure,
+  final Function(DioError error)? failure,
   final Map<String, String>? headers,
   final dynamic body,
   final bool encodeBody = true,
@@ -115,7 +115,7 @@ Future<void> patch({
   required final String url,
   required final Function(Response<dynamic> response) action,
   required final Function(Response<dynamic> response) error,
-  final Function(String error)? failure,
+  final Function(DioError error)? failure,
   final Map<String, String>? headers,
   final dynamic body,
   final bool encodeBody = true,
@@ -135,7 +135,7 @@ Future<void> httpDelete({
   required final String url,
   required final Function(Response<dynamic> response) action,
   required final Function(Response<dynamic> response) error,
-  final Function(String error)? failure,
+  final Function(DioError error)? failure,
   final Map<String, String>? headers,
 }) async =>
     request(
