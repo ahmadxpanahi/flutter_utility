@@ -36,6 +36,7 @@ extension RxPageStateExtension on Rx<PageState> {
 
 class UtilitiesConstants {
   static String token = "token";
+  static String refreshToken = "refresh-token";
 }
 
 enum PageState { initial, loading, loaded, error, empty , paging }
