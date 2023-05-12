@@ -6,8 +6,13 @@ void showFilePicker({
   required final Function(List<File> file) action,
   final FileType fileType = FileType.image,
   final bool allowMultiple = false,
+  final List<String>? allowedExtensions,
 }) async {
-  final FilePickerResult? result = await FilePicker.platform.pickFiles(type: fileType, allowMultiple: allowMultiple);
+  final FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: fileType,
+    allowMultiple: allowMultiple,
+    allowedExtensions: allowedExtensions,
+  );
   if (result != null) {
     if (allowMultiple) {
       final List<File> files = <File>[];
