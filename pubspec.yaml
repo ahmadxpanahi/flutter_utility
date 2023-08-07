@@ -17,7 +17,6 @@ dependencies:
   share_plus: ^4.0.3
   file_picker: ^4.5.1
   intl: ^0.17.0
-  webviewx: ^0.2.1
   get_storage: ^2.0.3
   flutter_svg: ^1.1.6
   persian_tools: ^1.0.1
