@@ -16,7 +16,6 @@ export 'package:logger/logger.dart';
 export 'package:path_provider/path_provider.dart';
 export 'package:persian_tools/persian_tools.dart';
 export 'package:share_plus/share_plus.dart';
-export 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 export 'package:url_launcher/url_launcher.dart';
 
 export 'components/components.dart';
