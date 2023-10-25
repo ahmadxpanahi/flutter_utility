@@ -6,7 +6,7 @@ GetConnect getConnect = GetConnect(
   timeout: const Duration(minutes: 60),
   allowAutoSignedCert: true,
   sendUserAgent: true,
-  userAgent: "SinaMN75",
+  userAgent: "AP",
   maxRedirects: 10,
   maxAuthRetries: 3,
 );
