@@ -40,11 +40,11 @@ Future<void> request(
         params = body;
     }
 
-    if (httpMethod == EHttpMethod.get) response = await dio.get(url, options: Options(headers: header));
+    if (httpMethod == EHttpMethod.get) response = await dio.get(url, data: params,options: Options(headers: header));
     if (httpMethod == EHttpMethod.post) response = await dio.post(url, data: params, options: Options(headers: header));
     if (httpMethod == EHttpMethod.put) response = await dio.put(url, data: params, options: Options(headers: header));
     if (httpMethod == EHttpMethod.patch) response = await dio.patch(url, data: params, options: Options(headers: header));
-    if (httpMethod == EHttpMethod.delete) response = await dio.delete(url, options: Options(headers: header));
+    if (httpMethod == EHttpMethod.delete) response = await dio.delete(url, data: params,options: Options(headers: header));
     if (response.isSuccessful()) {
       action(response);
     } else {
@@ -70,6 +70,8 @@ Future<void> httpGet({
   required final Function(Response<dynamic> response) error,
   final Function(DioError error)? failure,
   final Map<String, String>? headers,
+  final dynamic body,
+  final bool encodeBody = true,
 }) async =>
     request(
       url,
@@ -78,6 +80,8 @@ Future<void> httpGet({
       error,
       headers: headers,
       failure: failure,
+      body: body,
+      encodeBody: encodeBody,
     );
 
 Future<void> httpPost({
@@ -137,6 +141,8 @@ Future<void> httpDelete({
   required final Function(Response<dynamic> response) error,
   final Function(DioError error)? failure,
   final Map<String, String>? headers,
+  final dynamic body,
+  final bool encodeBody = true,
 }) async =>
     request(
       url,
@@ -145,6 +151,8 @@ Future<void> httpDelete({
       error,
       headers: headers,
       failure: failure,
+      body: body,
+      encodeBody: encodeBody
     );
 
 extension HTTP on Response<dynamic> {
