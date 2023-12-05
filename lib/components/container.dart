@@ -54,6 +54,7 @@ Widget column({
   final double? height,
   final bool isScrollable = false,
   final VoidCallback? onTap,
+  final ScrollController? scrollController,
 }) =>
     Container(
       width: width,
@@ -63,6 +64,7 @@ Widget column({
       margin: margin,
       child: isScrollable
           ? SingleChildScrollView(
+              controller: scrollController,
               child: Column(
                 mainAxisAlignment: mainAxisAlignment,
                 mainAxisSize: mainAxisSize,
@@ -96,6 +98,7 @@ Widget row({
   final double? height,
   final bool isScrollable = false,
   final VoidCallback? onTap,
+  final ScrollController? scrollController,
 }) =>
     Container(
       width: width,
@@ -105,6 +108,7 @@ Widget row({
       margin: margin,
       child: isScrollable
           ? SingleChildScrollView(
+              controller: scrollController,
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: mainAxisAlignment,
