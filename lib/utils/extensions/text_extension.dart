@@ -3,7 +3,7 @@ import 'package:utilities/utilities.dart';
 import 'dart:ui';
 
 extension TextExtension on Text {
-  Text headline1({
+  Text displayLarge({
     final Color? color,
     final FontWeight? fontWeight,
     final double? fontSize,
@@ -44,7 +44,7 @@ extension TextExtension on Text {
         textHeightBehavior: textHeightBehavior,
         textScaleFactor: textScaleFactor,
         textWidthBasis: textWidthBasis,
-        style: context.textTheme.headline1!.copyWith(package: package,
+        style: context.textTheme.displayLarge!.copyWith(package: package,
           locale: locale,
           leadingDistribution: leadingDistribution,
           inherit: inherit,
@@ -73,7 +73,7 @@ extension TextExtension on Text {
         ),
       );
 
-  Text headline2({
+  Text displayMedium({
     final Color? color,
     final FontWeight? fontWeight,
     final double? fontSize,
@@ -113,7 +113,7 @@ extension TextExtension on Text {
         textHeightBehavior: textHeightBehavior,
         textScaleFactor: textScaleFactor,
         textWidthBasis: textWidthBasis,
-        style: context.textTheme.headline2!.copyWith(package: package,
+        style: context.textTheme.displayMedium!.copyWith(package: package,
           locale: locale,
           leadingDistribution: leadingDistribution,
           inherit: inherit,
@@ -141,7 +141,7 @@ extension TextExtension on Text {
         ),
       );
 
-  Text headline3({
+  Text displaySmall({
     final Color? color,
     final FontWeight? fontWeight,
     final double? fontSize,
@@ -181,7 +181,7 @@ extension TextExtension on Text {
         textHeightBehavior: textHeightBehavior,
         textScaleFactor: textScaleFactor,
         textWidthBasis: textWidthBasis,
-        style: context.textTheme.headline3!.copyWith(package: package,
+        style: context.textTheme.displaySmall!.copyWith(package: package,
           locale: locale,
           leadingDistribution: leadingDistribution,
           inherit: inherit,
@@ -209,7 +209,7 @@ extension TextExtension on Text {
         ),
       );
 
-  Text headline4({
+  Text headlineLarge({
     final Color? color,
     final FontWeight? fontWeight,
     final double? fontSize,
@@ -249,7 +249,7 @@ extension TextExtension on Text {
         textHeightBehavior: textHeightBehavior,
         textScaleFactor: textScaleFactor,
         textWidthBasis: textWidthBasis,
-        style: context.textTheme.headline4!.copyWith(package: package,
+        style: context.textTheme.headlineLarge!.copyWith(package: package,
           locale: locale,
           leadingDistribution: leadingDistribution,
           inherit: inherit,
@@ -277,7 +277,7 @@ extension TextExtension on Text {
         ),
       );
 
-  Text headline5({
+  Text headlineMedium({
     final Color? color,
     final FontWeight? fontWeight,
     final double? fontSize,
@@ -317,7 +317,7 @@ extension TextExtension on Text {
         textHeightBehavior: textHeightBehavior,
         textScaleFactor: textScaleFactor,
         textWidthBasis: textWidthBasis,
-        style: context.textTheme.headline5!.copyWith(package: package,
+        style: context.textTheme.headlineMedium!.copyWith(package: package,
           locale: locale,
           leadingDistribution: leadingDistribution,
           inherit: inherit,
@@ -345,7 +345,7 @@ extension TextExtension on Text {
         ),
       );
 
-  Text headline6({
+  Text headlineSmall({
     final Color? color,
     final FontWeight? fontWeight,
     final double? fontSize,
@@ -385,7 +385,7 @@ extension TextExtension on Text {
         textHeightBehavior: textHeightBehavior,
         textScaleFactor: textScaleFactor,
         textWidthBasis: textWidthBasis,
-        style: context.textTheme.headline6!.copyWith(package: package,
+        style: context.textTheme.headlineSmall!.copyWith(package: package,
           locale: locale,
           leadingDistribution: leadingDistribution,
           inherit: inherit,
@@ -413,7 +413,7 @@ extension TextExtension on Text {
         ),
       );
 
-  Text subtitle1({
+  Text titleLarge({
     final Color? color,
     final FontWeight? fontWeight,
     final double? fontSize,
@@ -453,7 +453,7 @@ extension TextExtension on Text {
         textHeightBehavior: textHeightBehavior,
         textScaleFactor: textScaleFactor,
         textWidthBasis: textWidthBasis,
-        style: context.textTheme.subtitle1!.copyWith(package: package,
+        style: context.textTheme.titleLarge!.copyWith(package: package,
           locale: locale,
           leadingDistribution: leadingDistribution,
           inherit: inherit,
@@ -481,7 +481,7 @@ extension TextExtension on Text {
         ),
       );
 
-  Text subtitle2({
+  Text titleMedium({
     final Color? color,
     final FontWeight? fontWeight,
     final double? fontSize,
@@ -521,7 +521,7 @@ extension TextExtension on Text {
         textHeightBehavior: textHeightBehavior,
         textScaleFactor: textScaleFactor,
         textWidthBasis: textWidthBasis,
-        style: context.textTheme.subtitle2!.copyWith(package: package,
+        style: context.textTheme.titleMedium!.copyWith(package: package,
           locale: locale,
           leadingDistribution: leadingDistribution,
           inherit: inherit,
@@ -549,7 +549,7 @@ extension TextExtension on Text {
         ),
       );
 
-  Text bodyText1({
+  Text titleSmall({
     final Color? color,
     final FontWeight? fontWeight,
     final double? fontSize,
@@ -589,7 +589,7 @@ extension TextExtension on Text {
         textHeightBehavior: textHeightBehavior,
         textScaleFactor: textScaleFactor,
         textWidthBasis: textWidthBasis,
-        style: context.textTheme.bodyText1!.copyWith(package: package,
+        style: context.textTheme.titleSmall!.copyWith(package: package,
           locale: locale,
           leadingDistribution: leadingDistribution,
           inherit: inherit,
@@ -617,7 +617,7 @@ extension TextExtension on Text {
         ),
       );
 
-  Text bodyText2({
+  Text labelLarge({
     final Color? color,
     final FontWeight? fontWeight,
     final double? fontSize,
@@ -657,7 +657,7 @@ extension TextExtension on Text {
         textHeightBehavior: textHeightBehavior,
         textScaleFactor: textScaleFactor,
         textWidthBasis: textWidthBasis,
-        style: context.textTheme.bodyText2!.copyWith(package: package,
+        style: context.textTheme.labelLarge!.copyWith(package: package,
           locale: locale,
           leadingDistribution: leadingDistribution,
           inherit: inherit,
@@ -685,7 +685,7 @@ extension TextExtension on Text {
         ),
       );
 
-  Text caption({
+  Text labelMedium({
     final Color? color,
     final FontWeight? fontWeight,
     final double? fontSize,
@@ -725,7 +725,7 @@ extension TextExtension on Text {
         textHeightBehavior: textHeightBehavior,
         textScaleFactor: textScaleFactor,
         textWidthBasis: textWidthBasis,
-        style: context.textTheme.caption!.copyWith(package: package,
+        style: context.textTheme.labelMedium!.copyWith(package: package,
           locale: locale,
           leadingDistribution: leadingDistribution,
           inherit: inherit,
