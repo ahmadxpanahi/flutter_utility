@@ -24,7 +24,7 @@ dependencies:
   logger: ^2.0.1
   image_cropper: ^5.0.0
   cached_network_image: ^3.2.0
-  path_provider: ^2.0.10
+  path_provider: ^2.1.4
   flutter_local_notifications: ^9.5.2
   dio: ^5.1.1
   dio_smart_retry: ^5.0.0
