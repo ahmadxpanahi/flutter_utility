@@ -311,7 +311,7 @@ class CAlertDialog extends StatelessWidget {
       children.add(Padding(
         padding: titlePadding ?? EdgeInsets.fromLTRB(24.0, 24.0, 24.0, content == null ? 20.0 : 0.0),
         child: DefaultTextStyle(
-          style: titleTextStyle ?? dialogTheme.titleTextStyle ?? theme.textTheme.headline1!,
+          style: titleTextStyle ?? dialogTheme.titleTextStyle ?? theme.textTheme.displayLarge!,
           child: Semantics(
             child: title,
             namesRoute: true,
@@ -341,7 +341,7 @@ class CAlertDialog extends StatelessWidget {
         child: Padding(
           padding: contentPadding,
           child: DefaultTextStyle(
-            style: contentTextStyle ?? dialogTheme.contentTextStyle ?? theme.textTheme.headline2!,
+            style: contentTextStyle ?? dialogTheme.contentTextStyle ?? theme.textTheme.displayMedium!,
             child: content!,
           ),
         ),
@@ -601,7 +601,7 @@ class SimpleDialog extends StatelessWidget {
       body.add(Padding(
         padding: titlePadding,
         child: DefaultTextStyle(
-          style: Theme.of(context).textTheme.headline1!,
+          style: Theme.of(context).textTheme.displayLarge!,
           child: Semantics(namesRoute: true, child: title),
         ),
       ));

@@ -97,7 +97,7 @@ Future<T?> _showCupertinoBottomSheet<T>(
                       onPressed: action.onPressed,
                       child: Text(
                         action.title,
-                        style: action.textStyle ?? theme.textTheme.headline6,
+                        style: action.textStyle ?? theme.textTheme.headlineSmall,
                       )))
                   .toList(),
               cancelButton: cancelAction != null
@@ -105,7 +105,7 @@ Future<T?> _showCupertinoBottomSheet<T>(
                       onPressed: cancelAction.onPressed ?? () => Navigator.of(context).pop(),
                       child: Text(
                         cancelAction.title,
-                        style: cancelAction.textStyle ?? theme.textTheme.headline6!.copyWith(color: Colors.lightBlue),
+                        style: cancelAction.textStyle ?? theme.textTheme.headlineSmall!.copyWith(color: Colors.lightBlue),
                       ))
                   : null,
             ));
@@ -145,7 +145,7 @@ Future<T?> _showMaterialBottomSheet<T>(
                             padding: const EdgeInsets.all(16),
                             child: Text(
                               action.title,
-                              style: action.textStyle ?? theme.textTheme.headline6,
+                              style: action.textStyle ?? theme.textTheme.headlineSmall,
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -160,7 +160,7 @@ Future<T?> _showMaterialBottomSheet<T>(
                           padding: const EdgeInsets.all(16),
                           child: Text(
                             cancelAction.title,
-                            style: cancelAction.textStyle ?? theme.textTheme.headline6!.copyWith(color: Colors.lightBlue),
+                            style: cancelAction.textStyle ?? theme.textTheme.headlineSmall!.copyWith(color: Colors.lightBlue),
                           ),
                         ),
                       ),
