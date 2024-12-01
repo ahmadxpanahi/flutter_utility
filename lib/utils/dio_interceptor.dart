@@ -13,11 +13,19 @@ Future<void> request(
   final dynamic body,
   final bool encodeBody = true,
   final Map<String, String>? headers,
+  final int? timeoutSeconds,
+  final Function(int sent, int total)? onSendProgress,
 }) async {
   final Map<String, String> header = <String, String>{"Authorization": getString(UtilitiesConstants.token) ?? ""};
 
   if (headers != null) header.addAll(headers);
-  final Dio dio = Dio();
+  BaseOptions options = BaseOptions(
+    receiveDataWhenStatusError: true,
+    connectTimeout: Duration(seconds: timeoutSeconds ?? 40),
+    receiveTimeout: Duration(seconds: timeoutSeconds ?? 40),
+    sendTimeout: Duration(seconds: timeoutSeconds ?? 40),
+  );
+  final Dio dio = Dio(options);
 
   dio.interceptors.add(RetryInterceptor(
     dio: dio,
@@ -30,7 +38,12 @@ Future<void> request(
     ],
   ));
 
-  Response response = Response(requestOptions: RequestOptions(path: '', headers: header));
+  Response response = Response(
+    requestOptions: RequestOptions(
+      path: '',
+      headers: header,
+    ),
+  );
   try {
     dynamic params;
     if (body != null) {
@@ -40,11 +53,11 @@ Future<void> request(
         params = body;
     }
 
-    if (httpMethod == EHttpMethod.get) response = await dio.get(url, data: params,options: Options(headers: header));
-    if (httpMethod == EHttpMethod.post) response = await dio.post(url, data: params, options: Options(headers: header));
+    if (httpMethod == EHttpMethod.get) response = await dio.get(url, data: params, options: Options(headers: header));
+    if (httpMethod == EHttpMethod.post) response = await dio.post(url, data: params, options: Options(headers: header), onSendProgress: onSendProgress);
     if (httpMethod == EHttpMethod.put) response = await dio.put(url, data: params, options: Options(headers: header));
     if (httpMethod == EHttpMethod.patch) response = await dio.patch(url, data: params, options: Options(headers: header));
-    if (httpMethod == EHttpMethod.delete) response = await dio.delete(url, data: params,options: Options(headers: header));
+    if (httpMethod == EHttpMethod.delete) response = await dio.delete(url, data: params, options: Options(headers: header));
     if (response.isSuccessful()) {
       action(response);
     } else {
@@ -92,8 +105,21 @@ Future<void> httpPost({
   final Map<String, String>? headers,
   final dynamic body,
   final bool encodeBody = true,
+  final int? timeoutSeconds,
+  final Function(int sent, int total)? onSendProgress,
 }) async =>
-    request(url, EHttpMethod.post, action, error, body: body, encodeBody: encodeBody, headers: headers, failure: failure);
+    request(
+      url,
+      EHttpMethod.post,
+      action,
+      error,
+      body: body,
+      encodeBody: encodeBody,
+      headers: headers,
+      failure: failure,
+      timeoutSeconds: timeoutSeconds,
+      onSendProgress: onSendProgress,
+    );
 
 Future<void> httpPut({
   required final String url,
@@ -144,16 +170,7 @@ Future<void> httpDelete({
   final dynamic body,
   final bool encodeBody = true,
 }) async =>
-    request(
-      url,
-      EHttpMethod.delete,
-      action,
-      error,
-      headers: headers,
-      failure: failure,
-      body: body,
-      encodeBody: encodeBody
-    );
+    request(url, EHttpMethod.delete, action, error, headers: headers, failure: failure, body: body, encodeBody: encodeBody);
 
 extension HTTP on Response<dynamic> {
   bool isSuccessful() => (statusCode ?? 0) >= 200 && (statusCode ?? 0) <= 299 ? true : false;

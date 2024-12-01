@@ -15,6 +15,7 @@ Widget image(
   final EdgeInsets margin = EdgeInsets.zero,
   final String? placeholder,
   final VoidCallback? onTap,
+  final Widget? placeholderWidget,
 }) {
   if (source.length <= 10) {
     if (placeholder == null)
@@ -44,6 +45,7 @@ Widget image(
         color: color,
         onTap: onTap,
         placeholder: placeholder,
+        placeholderWidget: placeholderWidget,
       );
     else
       return imageAsset(
@@ -51,7 +53,6 @@ Widget image(
         width: width,
         height: height,
         fit: fit,
-
         clipBehavior: clipBehavior,
         margin: margin,
         borderRadius: borderRadius,
@@ -104,6 +105,7 @@ Widget imageNetwork(
   final EdgeInsets margin = EdgeInsets.zero,
   final VoidCallback? onTap,
   final String? placeholder,
+  final Widget? placeholderWidget,
 }) =>
     GestureDetector(
       onTap: onTap,
@@ -114,15 +116,16 @@ Widget imageNetwork(
         width: width,
         height: height,
         child: url.length <= 10
-            ? placeholder == null
+            ? placeholder == null && placeholderWidget == null
                 ? const SizedBox()
-                : imageAsset(
-                    placeholder,
-                    width: width,
-                    height: height,
-                    fit: fit,
-                    clipBehavior: clipBehavior,
-                  )
+                : placeholderWidget ??
+                    imageAsset(
+                      placeholder!,
+                      width: width,
+                      height: height,
+                      fit: fit,
+                      clipBehavior: clipBehavior,
+                    )
             : url.substring(url.length - 3) == "svg"
                 ? SvgPicture.network(
                     url,
@@ -130,10 +133,12 @@ Widget imageNetwork(
                     width: width,
                     height: height,
                     fit: fit,
-                    placeholderBuilder: placeholder == null
+                    placeholderBuilder: placeholder == null && placeholderWidget == null
                         ? null
-                        : (final _) => imageAsset(
-                              placeholder,
+                        : (final _) =>
+                            placeholderWidget ??
+                            imageAsset(
+                              placeholder!,
                               width: width,
                               height: height,
                               fit: fit,
@@ -146,20 +151,24 @@ Widget imageNetwork(
                     width: width,
                     height: height,
                     fit: fit,
-                    errorWidget: placeholder == null
+                    errorWidget: placeholder == null && placeholderWidget == null
                         ? null
-                        : (final _, final __, final ___) => imageAsset(
-                              placeholder,
+                        : (final _, final __, final ___) =>
+                            placeholderWidget ??
+                            imageAsset(
+                              placeholder!,
                               color: color,
                               width: width,
                               height: height,
                               fit: fit,
                               clipBehavior: clipBehavior,
                             ),
-                    placeholder: placeholder == null
+                    placeholder: placeholder == null && placeholderWidget == null
                         ? null
-                        : (final _, final __) => imageAsset(
-                              placeholder,
+                        : (final _, final __) =>
+                            placeholderWidget ??
+                            imageAsset(
+                              placeholder!,
                               color: color,
                               width: width,
                               height: height,
